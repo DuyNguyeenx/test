@@ -43,5 +43,44 @@
             {{ $paginate->links('name') }}
         </div>
 
+        <h3>Team Members</h3>
+
+        <ul id="team">
+            @foreach ($teams as $team)
+                <li>
+                    <a href="#team-{{ $team->id }}" data-toggle="collapse" class="icon-link">
+                       - {{ $team->name }}
+                    </a>
+                    @if (count($team->members) >0)
+                        <ul id="team-{{ $team->id }}" class="collapse">
+                            @foreach ($team->members as $member)
+                            {{-- <a href="#team-member-{{ $member->id }}" data-toggle="collapse"> --}}
+                                <li> {{ $member->name }}</li>
+                            {{-- </a> --}}
+                            @endforeach
+                        </ul>
+                    @endif
+                    @if (count($team->children) > 0)
+                    <ul id="team-{{ $team->id }}" class="collapse">
+                        @foreach ($team->children as $children)
+                        <li>
+                        <a href="#team-{{ $children->id }}" data-toggle="collapse">
+                            + {{ $children->name }}
+                            </a>
+                            <ul id="team-{{ $children->id }}" class="collapse">
+                                @foreach ($children->members as $member)
+                                {{-- <a href="#team-member-{{ $member->id }}" data-toggle="collapse"> --}}
+                                    <li> {{ $member->name }}</li>
+                                {{-- </a> --}}
+                                @endforeach
+                            </ul>
+                            </li>
+                            @endforeach
+                    </ul>
+
+                    @endif
+                </li> <br>
+            @endforeach
+        </ul>
 
 @endsection

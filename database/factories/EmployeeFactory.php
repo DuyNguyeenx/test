@@ -20,7 +20,8 @@ class EmployeeFactory extends Factory
             //
             'name' => fake()->name(),
             'email' => fake()->email(),
-            'tel' => fake()->phoneNumber()
+            'tel' => fake()->phoneNumber(),
+            'team_id' => $this->faker->numberBetween(1, 10),
         ];
     }
 }

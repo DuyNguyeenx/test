@@ -78,7 +78,20 @@
 <p></p>
 
 </footer>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#team').on('show.bs.collapse', function(e) {
+            $(e.target).prev('a').addClass('active');
+        });
 
+        $('#team').on('hide.bs.collapse', function(e) {
+            $(e.target).prev('a').removeClass('active');
+
+        });
+    });
+</script>
 <script src="{{asset('libs/input-mask/jquery.inputmask.js')}}"></script>
 
 <script src="{{asset('libs/jquery/dist/jquery.min.js')}}"></script>

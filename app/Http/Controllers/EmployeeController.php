@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Employee;
+use App\Models\Team;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
@@ -12,7 +13,8 @@ class EmployeeController extends Controller
     //
     public function index(){
         $paginate = Employee::paginate(3);
-        return view('index',compact('paginate'));
+        $teams = Team::with('members')->whereNull('parent_team_id')->get();
+        return view('index',compact('paginate','teams'));
     }
     public function search(Request $request){
         $keyword = $request->input('keyword');
